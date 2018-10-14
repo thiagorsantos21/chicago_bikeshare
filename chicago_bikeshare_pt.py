@@ -84,6 +84,8 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
 def column_to_list(data, index):
     column_list = []
+    for line in range(len(data)):
+        column_list.append(data[line][index])
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
     return column_list
 
@@ -104,7 +106,17 @@ input("Aperte Enter para continuar...")
 # TODO: Conte cada gênero. Você não deveria usar uma função para isso.
 male = 0
 female = 0
+not_especified = 0
 
+gender_list = column_to_list(data_list,-2)
+
+for gender in gender_list:
+    if(gender.lower() == "male"):
+        male += 1
+    elif (gender.lower() == "female"):
+        female += 1
+    else:
+        not_especified += 1
 
 # Verificando o resultado
 print("\nTAREFA 4: Imprimindo quantos masculinos e femininos nós encontramos")
