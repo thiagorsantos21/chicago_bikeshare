@@ -110,6 +110,10 @@ not_especified = 0
 
 gender_list = column_to_list(data_list,-2)
 
+"""
+    Utilizamos o for para ler acrescentar 1 as variáveis que server de contadoras para cada tipo de genero que retorna,
+    para comparar o genero, deixamos como lowercase para que não tenha problemas de comparacao de texto
+"""
 for gender in gender_list:
     if(gender.lower() == "male"):
         male += 1
@@ -131,9 +135,22 @@ input("Aperte Enter para continuar...")
 # TAREFA 5
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
+"""
+    Função que recebe uma lista, e quantifica o retorno de generos em uma nova lista.
+"""
 def count_gender(data_list):
+    gender_list = column_to_list(data_list,-2)
     male = 0
     female = 0
+    not_especified = 0
+
+    for gender in gender_list:
+        if(gender.lower() == "male"):
+            male += 1
+        elif (gender.lower() == "female"):
+            female += 1
+        else:
+            not_especified += 1
     return [male, female]
 
 
@@ -153,8 +170,15 @@ input("Aperte Enter para continuar...")
 # Esperamos ver "Male", "Female", ou "Equal" como resposta.
 def most_popular_gender(data_list):
     answer = ""
-    return answer
+    count_gender_list = count_gender(data_list);
 
+    if(count_gender_list[0] > count_gender_list[1] ):
+        answer = "Male"
+    elif (count_gender_list[0] == count_gender_list[1] ):
+        answer = "Equal"
+    else:
+        answer = "Female"
+    return answer
 
 print("\nTAREFA 6: Qual é o gênero mais popular na lista?")
 print("O gênero mais popular na lista é: ", most_popular_gender(data_list))
@@ -181,6 +205,45 @@ input("Aperte Enter para continuar...")
 # TODO: Crie um gráfico similar para user_types. Tenha certeza que a legenda está correta.
 print("\nTAREFA 7: Verifique o gráfico!")
 
+#def distinct_items (list):
+#    distinct_list = []
+#
+#    for item in list:
+#        if( item not in distinct_list ):
+#            distinct_list.append(item)
+#    return distinct_list
+
+
+def count_items(main_list, main_index, item_list):
+    dict = {}
+    for item in item_list:
+        count = 0
+        for main in  main_list:
+            if(main[main_index] == item):
+                count += 1
+        dict[item] = count
+    return dict
+
+def dictionary_to_list (item, dict):
+    content_list = []
+    for key in item:
+        if(key in dict):
+            content_list.append(dict[key])
+
+    return content_list
+
+user_types_list = column_to_list(data_list,-3)
+types = set(user_types_list)
+quantities = count_items(data_list,-3,types)
+quantity = dictionary_to_list(types,quantities)
+y_pos = list(range(len(types)))
+plt.bar(y_pos, quantity)
+plt.ylabel('Quantidade')
+plt.xlabel('Tipos de usuários')
+plt.xticks(y_pos, types)
+plt.title('Quantidade por tipo de usuários')
+plt.show(block=True)
+
 
 input("Aperte Enter para continuar...")
 # TAREFA 8
@@ -188,7 +251,7 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "Escreva sua resposta aqui."
+answer = "A informção é falsa, pois no arquivo possui gêneros não informados,que estão em branco, com isso não podemos afirmar que a soma dos dois gêneros(masculino e feminino) é igual a quantidade total da gêneros da lista."
 print("resposta:", answer)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
