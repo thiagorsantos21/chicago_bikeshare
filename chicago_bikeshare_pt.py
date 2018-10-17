@@ -251,7 +251,7 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "A informção é falsa, pois no arquivo possui gêneros não informados,que estão em branco, com isso não podemos afirmar que a soma dos dois gêneros(masculino e feminino) é igual a quantidade total da gêneros da lista."
+answer = "A informação é falsa, pois no arquivo possui gêneros não informados,que estão em branco, com isso não podemos afirmar que a soma dos dois gêneros(masculino e feminino) é igual a quantidade total da gêneros da lista."
 print("resposta:", answer)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
@@ -332,7 +332,7 @@ input("Aperte Enter para continuar...")
 # TAREFA 10
 # Gênero é fácil porque nós temos apenas algumas opções. E quanto a start_stations? Quantas opções ele tem?
 # TODO: Verifique quantos tipos de start_stations nós temos, usando set()
-start_stations = set()
+start_stations = set(column_to_list(data_list,3))
 
 print("\nTAREFA 10: Imprimindo as start stations:")
 print(len(start_stations))
@@ -346,26 +346,36 @@ input("Aperte Enter para continuar...")
 # TAREFA 11
 # Volte e tenha certeza que você documentou suas funções. Explique os parâmetros de entrada, a saída, e o que a função faz. Exemplo:
 # def new_function(param1: int, param2: str) -> list:
-#    """
-#      Função de exemplo com anotações.
-#      Argumentos:
-#          param1: O primeiro parâmetro.
-#          param2: O segundo parâmetro.
-#      Retorna:
-#          Uma lista de valores x.
+"""
+      Função de exemplo com anotações.
+      Argumentos:
+          param1: O primeiro parâmetro.
+          param2: O segundo parâmetro.
+      Retorna:
+          Uma lista de valores x.
 
-#    """
+"""
 
 input("Aperte Enter para continuar...")
 # TAREFA 12 - Desafio! (Opcional)
 # TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
 # para que nós possamos usar essa função com outra categoria de dados.
 print("Você vai encarar o desafio? (yes ou no)")
-answer = "no"
+answer = "yes"
 
 def count_items(column_list):
     item_types = []
     count_items = []
+
+    item_types = set(column_list);
+
+    for item in item_types:
+        count = 0
+        for text in  column_list:
+            if(text == item):
+                count += 1
+        count_items.append(count)
+
     return item_types, count_items
 
 
