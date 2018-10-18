@@ -136,7 +136,13 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 """
-    Função que recebe uma lista, e quantifica o retorno de generos em uma nova lista.
+        Função que recebe uma lista, e quantifica o retorno de generos em uma nova lista.
+
+        INPUT:
+        data_list: lista que será utilizada
+
+        OUTPUT:
+        Retorna uma nova lista com quantidade de gêneros masculino e feminino respectivamente.
 """
 def count_gender(data_list):
     gender_list = column_to_list(data_list,-2)
@@ -168,6 +174,18 @@ input("Aperte Enter para continuar...")
 # TAREFA 6
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Male", "Female", ou "Equal" como resposta.
+
+"""
+        Função que recebe uma lista, e retorna gênero mais popular da lista principal
+
+        INPUT:
+        data_list: lista que será utilizada
+
+        OUTPUT:
+        Retorna uma string com o gênero
+
+        Função utiliza de outra função já criada para obter a quantidade de gêneros da lista
+"""
 def most_popular_gender(data_list):
     answer = ""
     count_gender_list = count_gender(data_list);
@@ -214,6 +232,20 @@ print("\nTAREFA 7: Verifique o gráfico!")
 #    return distinct_list
 
 
+"""
+        Função que retorna um dicionario, que contabiliza quantidade de chaves de uma lista
+
+        INPUT:
+        main_list: lista que será utilizada
+        main_index: Indice da coluna que será lida da lista principal
+        item_list: Lista de itens únicos que serão contabilizados
+
+        OUTPUT:
+        Retorna um dicionario com cada item do parametro item_list, como 'Key' e quantidade como valor
+        do dicionario
+
+"""
+# Foi idealizada anteriormente a Tarefa 12, que na minha visão simplifica essa função criada
 def count_items(main_list, main_index, item_list):
     dict = {}
     for item in item_list:
@@ -224,6 +256,16 @@ def count_items(main_list, main_index, item_list):
         dict[item] = count
     return dict
 
+"""
+        Função que retorna uma lista de valores contidas no dicionario
+
+        INPUT:
+        item: Lista de itens únicos que foram usadas como chaves no dicionario
+        dict: dicionario no qual será utilizado para incluir as valores na lista de retorno
+
+        OUTPUT:
+        Retorna lista de valores contidos no dicionario
+"""
 def dictionary_to_list (item, dict):
     content_list = []
     for key in item:
@@ -231,6 +273,9 @@ def dictionary_to_list (item, dict):
             content_list.append(dict[key])
 
     return content_list
+
+#Nessa tarefa busquei todos os tipos de usuários disponiveis na lista principal
+#para formar um grafico dinamico
 
 user_types_list = column_to_list(data_list,-3)
 types = set(user_types_list)
@@ -264,12 +309,30 @@ input("Aperte Enter para continuar...")
 # TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
 # Você não deve usar funções prontas para isso, como max() e min().
 
+"""
+        Função que retorna uma lista de floats
+
+        INPUT:
+        list : lista de valores
+
+        OUTPUT:
+        Retorna lista de valores convertidos para float, a partir da parâmetro list
+"""
 def convert_string_list_to_float_list(list):
     float_list = []
     for item in list:
         float_list.append(float(item))
     return float_list
 
+"""
+        Função que retorna tempo máximo de uma viagem
+
+        INPUT:
+        trip_list: lista de números (float ou int)
+
+        OUTPUT:
+        Retorna o maior valor contido no parâmetro trip_list
+"""
 def get_max_trip(trip_list):
     max_value = 0.
     for trip in trip_list:
@@ -277,6 +340,15 @@ def get_max_trip(trip_list):
             max_value = trip
     return max_value
 
+"""
+        Função que retorna tempo minimo de uma viagem
+
+        INPUT:
+        trip_list: lista de números (float ou int)
+
+        OUTPUT:
+        Retorna o menor valor contido no parâmetro trip_list
+"""
 def get_min_trip(trip_list):
     min_value = 0.
     for trip in trip_list:
@@ -286,6 +358,15 @@ def get_min_trip(trip_list):
             min_value = trip
     return min_value
 
+"""
+        Função que retorna a média de tempo de uma viagem
+
+        INPUT:
+        trip_list: lista de números (float ou int)
+
+        OUTPUT:
+        Retorna a média de tempo de valores contidos no parâmetro trip_list
+"""
 def get_average_trip(trip_list):
     total_duration = 0.
     for trip in trip_list:
@@ -293,7 +374,17 @@ def get_average_trip(trip_list):
 
     return total_duration/len(trip_list)
 
+"""
+        Função que retorna a mediana de tempo de uma viagem
+
+        INPUT:
+        trip_list: lista de números (float ou int)
+
+        OUTPUT:
+        Retorna a mediana de tempo de valores contidos no parâmetro trip_list
+"""
 def get_median_trip(trip_duration_list):
+# Função foi criada baseada na explicação do Thiago do Prado, no slack
     sorted_list = sorted(trip_duration_list)
     mid = len(sorted_list) // 2
     iseven = len(sorted_list) % 2 == 0
@@ -308,12 +399,22 @@ def get_median_trip(trip_duration_list):
 
     return median_trip
 
+
 trip_duration_list = column_to_list(data_list, 2)
 trip_duration_list = convert_string_list_to_float_list(trip_duration_list)
 min_trip = get_min_trip(trip_duration_list)
 max_trip = get_max_trip(trip_duration_list)
 
-avg = lambda x: sum(x)/len(x)
+"""
+        Função lambda que retorna a média de uma lista
+
+        INPUT:
+        trip_list: lista de números (float ou int)
+
+        OUTPUT:
+        Retorna a média dos valores contidos no parâmetro trip_list
+"""
+avg = lambda list: sum(list)/len(list)
 mean_trip = avg(trip_duration_list)
 
 median_trip = get_median_trip(trip_duration_list)
@@ -363,6 +464,19 @@ input("Aperte Enter para continuar...")
 print("Você vai encarar o desafio? (yes ou no)")
 answer = "yes"
 
+
+"""
+        Função que retorna duas listas uma com itens únicos e outra com a
+        quantidade contabilizadas desses itens
+
+        INPUT:
+        column_list: lista de valores ou itens a serem contabilizados
+
+        OUTPUT:
+        Retorna duas listas item_types e count_items, respectivamente
+        com itens únicos contidas no parametro column_list e lista de inteiros
+        contabilização desses itens
+"""
 def count_items(column_list):
     item_types = []
     count_items = []
